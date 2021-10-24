@@ -32,7 +32,7 @@ def reportCompressionRate(original, compressed):
     rate = original/compressed
     print('The compression rate was ' + str(rate) + '.')
 
-def generateOutputFile(which, filename):
+def generateOutputFile(which, file, filename):
     f= open( which +'-'+filename+'-'+str(randSuffix) + '.txt', 'w')
     f.write(file)
     f.close()
@@ -47,12 +47,12 @@ if __name__ == "__main__":
     file = fileData.read()
     original = reportSize(file, 'original')
     printSample(file,'original')
-    generateOutputFile('original',filename)
+    generateOutputFile('original',file, filename)
 
     #compression
     start = time.time()
     compressedFile = compress(file)
-    generateOutputFile('compressed', filename)
+    generateOutputFile('compressed', compressedFile, filename)
     end = time.time()
     reportTime(start, end, 'compression')
     compressed = reportSize(compressedFile, 'compressed')
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     #decompression
     start = time.time()
     decompressedFile = decompress(compressedFile)
-    generateOutputFile('decompressed', filename)
+    generateOutputFile('decompressed', decompressedFile, filename)
     end = time.time()
     reportTime(start, end, 'decompresssion')
     printSample(decompressedFile, 'decompressed')
