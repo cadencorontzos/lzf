@@ -1,7 +1,7 @@
-#LZW
+# LZW
 A simple implementation of the Lempel-Ziv Welch compression algorithm.
 
-###Usage:
+### Usage:
 
 To run, use command 
 
