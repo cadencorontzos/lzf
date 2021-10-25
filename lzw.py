@@ -9,7 +9,7 @@ import random
 import os
 
 def compress(filename, newFileName):
-    codebook = {}
+    codebook = {chr(i):i for i in range(128)}
     file = open(filename, 'r')
     newFile = open(newFileName, 'w')
     codeword = 0
@@ -31,7 +31,7 @@ def compress(filename, newFileName):
     newFile.close()
 
 def decompress(compressedfilename, newFileName):
-    codebook = {}
+    codebook = {chr(i):i for i in range(128)}
     file = open(compressedfilename, 'r')
     newFile = open(newFileName, 'w')
     codeword = 1
@@ -41,10 +41,10 @@ def decompress(compressedfilename, newFileName):
     nextChar = file.read(1)
     currentBlock = ''
     while nextChar:
-        # print(codebook)
-        # print('currentBlock',currentBlock)
-        # print('nextChar', nextChar)
-        # print('nextChar.isalpha()',nextChar.isalpha())
+        print(codebook)
+        print('currentBlock',currentBlock)
+        print('nextChar', nextChar)
+        print('nextChar.isalpha()',nextChar.isalpha())
         if nextChar.isnumeric():
             currentBlock+=nextChar
         else:
@@ -91,10 +91,14 @@ def printFooter(names):
 if __name__ == "__main__":
     randSuffix = random.randint(10000,20000)
     names = []
+    filename = sys.argv[-1]
+
+    printHeader(filename)
+
 
     #original
     printHeader('original')
-    filename = sys.argv[-1]
+    
     fileData = open(filename)
     file = fileData.read()
     original = reportSize(filename, 'original')
