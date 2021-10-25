@@ -1,5 +1,5 @@
 
-# +++++++++ LZW Compression ++++++++++++
+# +++++++++ LZW Compression +++++++++
 # Implementation by Caden Corontzos, Oct. 2021
 # See Lisence for terms of use
 
@@ -8,29 +8,57 @@ import time
 import random
 import os
 
-def compress(filename, newfilename):
+def compress(filename, newFileName):
     codebook = {}
     file = open(filename, 'r')
-    newFile = open(newfilename, 'w')
+    newFile = open(newFileName, 'w')
     codeword = 0
     nextChar = file.read(1)
     currentBlock = ''
-    #does this run too many times?
-    while nextChar:
-        currentBlock = str(currentBlock) + nextChar
-        if codebook.get(currentBlock):
-            currentBlock = codebook.get(currentBlock)
+    while nextChar:       
+        currentBlock+=nextChar
+        if codebook.get(currentBlock) is not None:
+            pass
         else:
             codebook[currentBlock] = codeword
+            if codebook.get(currentBlock[:-1]) is not None:
+                currentBlock = str(codebook.get(currentBlock[:-1])) + currentBlock[-1]
             codeword+=1
             newFile.write(currentBlock)
-            currentBlock = ''
+            currentBlock = '' 
         nextChar = file.read(1)
     file.close()
     newFile.close()
 
-def decompress(filename, newFileName):
-    return('test')
+def decompress(compressedfilename, newFileName):
+    codebook = {}
+    file = open(compressedfilename, 'r')
+    newFile = open(newFileName, 'w')
+    codeword = 1
+    nextChar = file.read(1)
+    codebook[0] = nextChar
+    newFile.write(nextChar)
+    nextChar = file.read(1)
+    currentBlock = ''
+    while nextChar:
+        # print(codebook)
+        # print('currentBlock',currentBlock)
+        # print('nextChar', nextChar)
+        # print('nextChar.isalpha()',nextChar.isalpha())
+        if nextChar.isnumeric():
+            currentBlock+=nextChar
+        else:
+            if currentBlock == '':
+                currentBlock = nextChar
+            else:
+                currentBlock = str(codebook.get(int(currentBlock))) + nextChar
+            codebook[codeword] = currentBlock
+            codeword+=1
+            newFile.write(currentBlock)
+            currentBlock = '' 
+        nextChar = file.read(1)
+    file.close()
+    newFile.close()
 
 def printHeader(what):
     print('---------------------------------------')
@@ -81,7 +109,7 @@ if __name__ == "__main__":
     compressedFileName = makeFilename('compressed', filename)
     names.append(compressedFileName) 
     start = time.time()
-    compressedFile = compress(filename, compressedFileName)
+    compress(filename, compressedFileName)
     end = time.time()
     reportTime(start, end, 'compression')
     reportSize(compressedFileName, 'compressed')
@@ -91,10 +119,10 @@ if __name__ == "__main__":
     printHeader('decompression')
     decompressedFileName = makeFilename('decompressed', filename)
     start = time.time()
-    decompressedFile = decompress(compressedFileName, decompressedFileName)
+    decompress(compressedFileName, decompressedFileName)
     end = time.time()
     names.append(decompressedFileName)
     reportTime(start, end, 'decompresssion')
-    # reportSize(decompressedFileName, 'decompressed')
+    reportSize(decompressedFileName, 'decompressed')
 
     printFooter(names)
