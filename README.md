@@ -28,4 +28,19 @@ To clear these output files, which build up over repeated use, run
     sh clean.sh
 ```
 
+### Example Output
+
+Here is an example of what would be output by the program. This is for an input file
+
+
+For other txt files to test, visit this [website](https://gutenberg.org)
+
+### Canterbury Corpus
+
+The Canterbury Corpus is a collection of files that are a benchmark for comparing compression algorithms. For more information, see their [website](https://corpus.canterbury.ac.nz/descriptions/). These files are included in the repository for your convinence. To test the implementation against these files, simply run 
+
+```
+    sh cantrbry.sh
+```
+
 
