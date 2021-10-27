@@ -32,8 +32,7 @@ To clear these output files, which build up over repeated use, run
 Here is an example of what would be output by the program. This is for an input file
 
 ```
-%>
-%> python3 lzw.py cantrbry/alice29.txt
+% python3 lzw.py cantrbry/alice29.txt
 ------------------------------------------------------------------------------
 CANTRBRY/ALICE29.TXT:
 ------------------------------------------------------------------------------
