@@ -15,10 +15,10 @@ To run, use command
 ```
 
 where 'input file' is a txt file. The program will print a report of the compression/decompression process.
-It will also produce three output files 
+It will also produce two output files 
 
 ```
-    original-FILENAME-XXXXX.txt    compressed-FILENAME-XXXXX.txt   decompressed-FILENAME-XXXXX.txt
+    compressed-FILENAME-XXXXX.txt   decompressed-FILENAME-XXXXX.txt
 ```
 where FILENAME is the name of the input file and XXXXX is a random number. 
 To clear these output files, which build up over repeated use, run
@@ -29,7 +29,7 @@ To clear these output files, which build up over repeated use, run
 
 ### Example Output
 
-Here is an example of what would be output by the program. This is for an input file
+Here is an example of what would be output by the program. This is for an txt file, although the algoritm does work on other file types.
 
 ```
 %>
@@ -54,7 +54,7 @@ To see the three versions of the file, see cantrbry/alice29.txt, outputFiles/com
 %
 ```
 
-For other txt files to test, visit this [website](https://gutenberg.org)
+For other txt files to test, visit this [website](https://gutenberg.org) There are also other files included in /cantrbry, discussed below
 
 ### Canterbury Corpus
 
