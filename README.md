@@ -31,6 +31,28 @@ To clear these output files, which build up over repeated use, run
 
 Here is an example of what would be output by the program. This is for an input file
 
+```
+%>
+%> python3 lzw.py cantrbry/alice29.txt
+------------------------------------------------------------------------------
+CANTRBRY/ALICE29.TXT:
+------------------------------------------------------------------------------
+ORIGINAL:
+    Size  : The size of the original file is 152089 bytes.
+------------------------------------------------------------------------------
+COMPRESSION:
+    Time  : The time of compression was 0.10453915596008301 seconds.
+    Size  : The size of the compressed file is 87268 bytes.
+    Rate  : The compression rate was 0.5737956065198666.
+------------------------------------------------------------------------------
+DECOMPRESSION:
+    Time  : The time of decompresssion was 0.10741090774536133 seconds.
+    Size  : The size of the decompressed file is 152089 bytes.
+    Check : The originial file and the decompressed file are the same.
+------------------------------------------------------------------------------
+To see the three versions of the file, see cantrbry/alice29.txt, outputFiles/compressed-alice29.txt-10389.txt, outputFiles/decompressed-alice29.txt-10389.txt.
+%
+```
 
 For other txt files to test, visit this [website](https://gutenberg.org)
 
