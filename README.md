@@ -1,10 +1,9 @@
 # LZW
 A simple implementation of the Lempel-Ziv Welch compression algorithm in python.
 
-## Background
+### Background
 
-LZW is a universal lossless compression algorithm that was first published in a paper by Abraham Lempel and Jacob Ziv, published in 1978. It was improved in a second paper by Terry Welch in 1984. The main attraction is that insead of constructing a codebook and sending that along with the encoded message, the codebook is constructed on the fly, by both the encryption and decryption functions, eliminating the need to send a codebook. The method of encoding can be seen in the `encode()` function. For more on the encoding method and the algorithm in general, visit the LZW [wikipedia page](https://en.wikipedia.org/wiki/Lempel–Ziv–Welch)  
-Or see [Welch's 1984 paper](https://courses.cs.duke.edu//spring03/cps296.5/papers/welch_1984_technique_for.pdf) or [Lempel and Ziv's 1978 paper](https://courses.cs.duke.edu/spring03/cps296.5/papers/ziv_lempel_1977_universal_algorithm.pdf)  
+LZW is a universal lossless compression algorithm that was first published in a paper by Abraham Lempel and Jacob Ziv, published in 1978. It was improved in a second paper by Terry Welch in 1984. The main attraction is that insead of constructing a codebook and sending that along with the encoded message, the codebook is constructed on the fly, by both the encryption and decryption functions, eliminating the need to send a codebook. The method of encoding can be seen in the `encode()` function. For more on the encoding method and the algorithm in general, visit the LZW [wikipedia page](https://en.wikipedia.org/wiki/Lempel–Ziv–Welch), or see [Welch's 1984 paper](https://courses.cs.duke.edu//spring03/cps296.5/papers/welch_1984_technique_for.pdf) or [Lempel and Ziv's 1978 paper](https://courses.cs.duke.edu/spring03/cps296.5/papers/ziv_lempel_1977_universal_algorithm.pdf)  
 
 ### Usage
 
@@ -32,8 +31,7 @@ To clear these output files, which build up over repeated use, run
 Here is an example of what would be output by the program. This is for an txt file, although the algoritm does work on other file types.
 
 ```
-%>
-%> python3 lzw.py cantrbry/alice29.txt
+% python3 lzw.py cantrbry/alice29.txt
 ------------------------------------------------------------------------------
 CANTRBRY/ALICE29.TXT:
 ------------------------------------------------------------------------------
@@ -50,7 +48,9 @@ DECOMPRESSION:
     Size  : The size of the decompressed file is 152089 bytes.
     Check : The originial file and the decompressed file are the same.
 ------------------------------------------------------------------------------
-To see the three versions of the file, see cantrbry/alice29.txt, outputFiles/compressed-alice29.txt-10389.txt, outputFiles/decompressed-alice29.txt-10389.txt.
+To see the three versions of the file, see cantrbry/alice29.txt, 
+outputFiles/compressed-alice29.txt-10389.txt, 
+outputFiles/decompressed-alice29.txt-10389.txt.
 %
 ```
 
@@ -65,5 +65,7 @@ The Canterbury Corpus is a collection of files that are a benchmark for comparin
 ```
 
 ### Possible Extensions
+Some things I would have liked to do and did not get to/didn't have time for
 
-    Some things I would have liked to do and did not get to/didn't have time for
+* Dynamic dictionary sizes: Sometimes, when a dictionary gets too big, you'd be better off starting over than continuing to add to it. Ideally, our `encode()` and `dedode()` would reset the dictionary as it got over a certain size.
+* Changing the starting dictionary: Having a dictionary with the keywords for a certain programming language, for example, would make the encoding process smoother. A future version of this project could see the file extension and pick an appropriate starting dictionary.
