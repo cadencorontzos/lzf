@@ -1,4 +1,3 @@
-original-*
-compressed-*
-decompressed-*
-*.txt
+outputFiles/original-*
+outputFiles/compressed-*
+outputFiles/decompressed-*

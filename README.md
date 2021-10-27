@@ -42,4 +42,6 @@ The Canterbury Corpus is a collection of files that are a benchmark for comparin
     sh cantrbry.sh
 ```
 
+### Possible Extensions
 
+    Some things I would have liked to do and did not get to/didn't have time for

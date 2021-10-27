@@ -12,6 +12,7 @@ import math
 """
     COMPRESS AND DECOMPRESS: both funtions take the name of the file they are meant to operate on, and the name of the file they are meant to write to.
     The initial dictionary should vary by type of data. Generally, it should have at least the base characters of the file type.
+    See: Possible Extensions (in README)
 """
 
 def compress(filename, newFileName):
@@ -27,12 +28,15 @@ def compress(filename, newFileName):
             currentBlock+=nextChar
         else:
             possibleCodeLength = math.ceil(math.log(codeword,2)/8)
-            newFile.write(codebook[currentBlock].to_bytes(possibleCodeLength, 'big'))
+            if currentBlock:
+                newFile.write(codebook[currentBlock].to_bytes(possibleCodeLength, 'big'))
             newFile.write(nextChar)
             codebook[currentBlock+nextChar] = codeword
             codeword+=1
             currentBlock = ''.encode()
         nextChar = file.read(1)
+    
+    #if there was a character left over
     if currentBlock != '':
         newFile.write(codebook[currentBlock].to_bytes(possibleCodeLength, 'big'))
     file.close()
@@ -47,6 +51,7 @@ def decompress(compressedFileName, newFileName):
     nextChar = file.read(1)
     currentBlock = ''.encode()
     while nextChar:  
+
         possibleCodeLength = math.ceil(math.log(codeword,2)/8)
         if len(currentBlock) < possibleCodeLength:
             currentBlock+=nextChar
@@ -61,6 +66,8 @@ def decompress(compressedFileName, newFileName):
             codeword+=1
             currentBlock = ''.encode()
         nextChar = file.read(1)
+    
+    #if there was a character left over
     if currentBlock:
             index = int.from_bytes(currentBlock,'big')
             theByte = codebook[index]
@@ -94,7 +101,9 @@ def reportCompressionRate(originalFileName, compressedFileName):
     print('The compression rate was ' + str(rate) + '.')
 
 def makeFilename(which, filename):
-    return which +'-'+filename+'-'+str(randSuffix) + '.txt'
+    if '/' in filename:
+        filename = filename.split('/')[1]
+    return './outputFiles/' +which +'-'+filename+'-'+str(randSuffix) + '.txt'
 
 def assertCorrectness(originalFile, decompressedFile):
     oFileData = open(originalFile)
@@ -122,7 +131,6 @@ if __name__ == "__main__":
     randSuffix = random.randint(10000,20000)
     names = []
     filename = sys.argv[-1]
-
     printHeader(filename)
 
 

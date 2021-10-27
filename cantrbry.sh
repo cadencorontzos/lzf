@@ -1,0 +1,10 @@
+python3 lzw.py alice29.txt
+python3 lzw.py asyoulik.txt
+python3 lzw.py fields.c
+python3 lzw.py grammar.lsp
+python3 lzw.py kennedy.xls
+python3 lzw.py plrabn12.txt
+python3 lzw.py ptt5
+python3 lzw.py sum
+python3 lzw.py xargs.1
+python3 lzw.py lxet10.txt
