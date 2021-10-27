@@ -1,1 +1,2 @@
-rm original-*.txt compressed-*.txt decompressed-*.txt
+rm -rf outputFiles
+mkdir outputFiles
