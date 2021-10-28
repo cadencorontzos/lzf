@@ -14,7 +14,7 @@ You can clone using `git clone`, or you can download directly from github. To ru
 ```
 
 where 'input file' is the file name. The program will print a report of the compression/decompression process.
-It will also produce two output files 
+It will also produce two output files, found in the `/outputFiles` folder
 
 ```
     compressed-FILENAME-XXXXX.lzw   decompressed-FILENAME-XXXXX.EXT
