@@ -10,16 +10,18 @@ import os
 import math
 
 """
-    COMPRESS AND DECOMPRESS: both funtions take the name of the file they are meant to operate on, and the name of the file they are meant to write to.
-    The initial dictionary should vary by type of data. Generally, it should have at least the base characters of the file type.
+    COMPRESS AND DECOMPRESS: both funtions take the name of the file they
+    are meant to operate on, and the name of the file they are meant to 
+    write to. The initial dictionary should vary by type of data. Generally,
+    it should have at least the base characters of the file type.
     See: Possible Extensions (in README)
 """
 
 def compress(filename, newFileName):
-    codebook    = {chr(i).encode():i for i in range(256)}
+    codebook    = {chr(i-1).encode():i for i in range(1,257)}
     file        = open(filename, 'rb')
     newFile     = open(newFileName, 'wb')
-    codeword    = 256
+    codeword    = 257
     
     nextChar = file.read(1)
     currentBlock = ''.encode()
@@ -30,6 +32,8 @@ def compress(filename, newFileName):
             possibleCodeLength = math.ceil(math.log(codeword,2)/8)
             if currentBlock:
                 newFile.write(codebook[currentBlock].to_bytes(possibleCodeLength, 'big'))
+            else:
+                newFile.write((0).to_bytes(possibleCodeLength, 'big'))
             newFile.write(nextChar)
             codebook[currentBlock+nextChar] = codeword
             codeword+=1
@@ -37,30 +41,33 @@ def compress(filename, newFileName):
         nextChar = file.read(1)
     
     #if there was a character left over
-    if currentBlock != '':
+    if currentBlock != ''.encode():
         newFile.write(codebook[currentBlock].to_bytes(possibleCodeLength, 'big'))
     file.close()
     newFile.close()
 
 def decompress(compressedFileName, newFileName):
-    codebook    = {i:chr(i).encode() for i in range(256)}
+    codebook    = {i:chr(i-1).encode() for i in range(1,256)}
     file        = open(compressedFileName, 'rb')
-    newFile     = open(newFileName, 'w')
-    codeword    = 256
+    newFile     = open(newFileName, 'wb')
+    codeword    = 257
     
     nextChar = file.read(1)
     currentBlock = ''.encode()
     while nextChar:  
 
         possibleCodeLength = math.ceil(math.log(codeword,2)/8)
+
         if len(currentBlock) < possibleCodeLength:
             currentBlock+=nextChar
         else:
-
             index = int.from_bytes(currentBlock,'big')
-            theByte = codebook[index]
-            theAdditionalByte = nextChar.decode()
-            newFile.write(theByte.decode())
+            if index != 0:
+                theByte = codebook[index]
+            else:
+                theByte = ''.encode()
+            theAdditionalByte = nextChar
+            newFile.write(theByte)
             newFile.write(theAdditionalByte)
             codebook[codeword] = theByte+nextChar
             codeword+=1
@@ -71,7 +78,7 @@ def decompress(compressedFileName, newFileName):
     if currentBlock:
             index = int.from_bytes(currentBlock,'big')
             theByte = codebook[index]
-            newFile.write(theByte.decode())
+            newFile.write(theByte)
 
     file.close()
     newFile.close()
@@ -87,43 +94,51 @@ def printHeader(what):
 
 def reportSize(filename, which):
     size = os.path.getsize(filename)
-    print('The size of the ' + which + ' file is '+ str(size) + ' bytes.')
+    print('    Size  : The size of the ' + which + ' file is '+ str(size) + ' bytes.')
     return size
 
 def reportTime(start, end, what):
     totalTime = end - start
-    print('The time of ' + what + ' was ' + str(totalTime) + ' seconds.')
+    print('    Time  : The time of ' + what + ' was ' + str(totalTime) + ' seconds.')
 
 def reportCompressionRate(originalFileName, compressedFileName):
     original = os.path.getsize(originalFileName)
     compressed = os.path.getsize(compressedFileName)
     rate = compressed/original
-    print('The compression rate was ' + str(rate) + '.')
+    print('    Rate  : The compression rate was ' + str(rate) + '.')
 
 def makeFilename(which, filename):
+    ext = ''
     if '/' in filename:
         filename = filename.split('/')[1]
-    return './outputFiles/' +which +'-'+filename+'-'+str(randSuffix) + '.txt'
+    if '.' in filename:
+        ext = '.'+filename.split('.')[1]
+        filename = filename.split('.')[0]
+    if which =='compressed':
+        ext = '.lzw'
+    return 'outputFiles/' +which +'-'+filename+'-'+str(randSuffix) + ext
 
 def assertCorrectness(originalFile, decompressedFile):
-    oFileData = open(originalFile)
+    oFileData = open(originalFile, 'rb')
     oFile = oFileData.read()
-    dFileData = open(decompressedFile)
+    dFileData = open(decompressedFile,'rb')
     dFile = dFileData.read()
     if oFile==dFile:
-        print('The originial file and the decompressed file are the same.')
+        print('    Check : The originial file and the decompressed file are the same.')
     else:
-        print('Decomp error: The originial file and the decompressed file are not the same.')
+        print('    Check : Decomp error: The originial file and the decompressed file are not the same.')
     
 def printFooter(names):
     print('------------------------------------------------------------------------------')
     print('To see the three versions of the file, see ', end = '')
-    print(*names, sep=', ', end='.\n')
+    print(*names, sep=', \n', end='.\n')
 
 
 """
-    REPORT GENERATION: On command line call, the name of the file is taken in. The file is compressed, then decompressed. The logistics of this process 
-    are printed to the console, the compressed and decompressed files are output into the directory, and the correctness of the algorithm is checked.
+    REPORT GENERATION: On command line call, the name of the file is taken in. 
+    The file is compressed, then decompressed. The logistics of this process 
+    are printed to the console, the compressed and decompressed files are output
+    into the directory, and the correctness of the algorithm is checked.
 
 """
 
@@ -163,4 +178,5 @@ if __name__ == "__main__":
     reportSize(decompressedFileName, 'decompressed')
     assertCorrectness(filename,decompressedFileName)
 
+    #tells user where to view the files generated
     printFooter(names)

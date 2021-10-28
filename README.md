@@ -7,19 +7,20 @@ LZW is a universal lossless compression algorithm that was first published in a 
 
 ### Usage
 
-To run, use command 
+You can clone using `git clone`, or you can download directly from github. To run on a file, use command 
 
 ```
     python3 lzw.py <input file>
 ```
 
-where 'input file' is a txt file. The program will print a report of the compression/decompression process.
+where 'input file' is the file name. The program will print a report of the compression/decompression process.
 It will also produce two output files 
 
 ```
-    compressed-FILENAME-XXXXX.txt   decompressed-FILENAME-XXXXX.txt
+    compressed-FILENAME-XXXXX.lzw   decompressed-FILENAME-XXXXX.EXT
 ```
-where FILENAME is the name of the input file and XXXXX is a random number. 
+where FILENAME is the name of the input file, XXXXX is a random number, and EXT was the 
+extension on the input file. 
 To clear these output files, which build up over repeated use, run
 
 ```
@@ -39,17 +40,21 @@ ORIGINAL:
     Size  : The size of the original file is 152089 bytes.
 ------------------------------------------------------------------------------
 COMPRESSION:
-    Time  : The time of compression was 0.10453915596008301 seconds.
-    Size  : The size of the compressed file is 87268 bytes.
-    Rate  : The compression rate was 0.5737956065198666.
+    Time  : The time of compression was 0.09288978576660156 seconds.
+    Size  : The size of the compressed file is 87269 bytes.
+    Rate  : The compression rate was 0.5738021816173424.
 ------------------------------------------------------------------------------
 DECOMPRESSION:
-    Time  : The time of decompresssion was 0.10741090774536133 seconds.
+    Time  : The time of decompresssion was 0.08072090148925781 seconds.
     Size  : The size of the decompressed file is 152089 bytes.
     Check : The originial file and the decompressed file are the same.
 ------------------------------------------------------------------------------
 To see the three versions of the file, see cantrbry/alice29.txt, 
-outputFiles/compressed-alice29.txt-10389.txt, 
+outputFiles/compressed-alice29.txt-12547.txt, 
+outputFiles/decompressed-alice29.txt-12547.txt.
+------------------------------------------------------------------------------
+To see the three versions of the file, see cantrbry/alice29.txt, 
+outputFiles/compressed-alice29.txt-10389.lzw, 
 outputFiles/decompressed-alice29.txt-10389.txt.
 %
 ```
