@@ -59,7 +59,7 @@ outputFiles/decompressed-alice29.txt-10389.txt.
 %
 ```
 
-For other txt files to test, visit this [website](https://gutenberg.org) There are also other files included in /cantrbry, discussed below
+For other txt files to test, visit this [website](https://gutenberg.org). There are also other files included in /cantrbry, discussed below
 
 ### Canterbury Corpus
 
