@@ -47,7 +47,7 @@ def compress(filename, newFileName):
     newFile.close()
 
 def decompress(compressedFileName, newFileName):
-    codebook    = {i:chr(i-1).encode() for i in range(1,256)}
+    codebook    = {i:chr(i-1).encode() for i in range(1,257)}
     file        = open(compressedFileName, 'rb')
     newFile     = open(newFileName, 'wb')
     codeword    = 257
@@ -104,7 +104,7 @@ def reportTime(start, end, what):
 def reportCompressionRate(originalFileName, compressedFileName):
     original = os.path.getsize(originalFileName)
     compressed = os.path.getsize(compressedFileName)
-    rate = compressed/original
+    rate = original/compressed
     print('    Rate  : The compression rate was ' + str(rate) + '.')
 
 def makeFilename(which, filename):

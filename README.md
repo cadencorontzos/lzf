@@ -40,22 +40,18 @@ ORIGINAL:
     Size  : The size of the original file is 152089 bytes.
 ------------------------------------------------------------------------------
 COMPRESSION:
-    Time  : The time of compression was 0.09288978576660156 seconds.
+    Time  : The time of compression was 0.09675073623657227 seconds.
     Size  : The size of the compressed file is 87269 bytes.
-    Rate  : The compression rate was 0.5738021816173424.
+    Rate  : The compression rate was 1.7427608887462902.
 ------------------------------------------------------------------------------
 DECOMPRESSION:
-    Time  : The time of decompresssion was 0.08072090148925781 seconds.
+    Time  : The time of decompresssion was 0.08884429931640625 seconds.
     Size  : The size of the decompressed file is 152089 bytes.
     Check : The originial file and the decompressed file are the same.
 ------------------------------------------------------------------------------
-To see the three versions of the file, see cantrbry/alice29.txt, 
-outputFiles/compressed-alice29.txt-12547.txt, 
-outputFiles/decompressed-alice29.txt-12547.txt.
-------------------------------------------------------------------------------
-To see the three versions of the file, see cantrbry/alice29.txt, 
-outputFiles/compressed-alice29.txt-10389.lzw, 
-outputFiles/decompressed-alice29.txt-10389.txt.
+To see the three versions of the file, see cantrbry/alice29.txt,
+outputFiles/compressed-alice29-19375.lzw,
+outputFiles/decompressed-alice29-19375.txt.
 %
 ```
 
